@@ -22,4 +22,5 @@ binaries
 tags
 *.swp
 install/*
+*.rej
 
