@@ -30,9 +30,8 @@
  * Creation            : NLe Jul 11th 2006
  *-----------------------------------------------------------------------------
  */
+#include "common.h"
 #include "sdramc.h"
-#include "part.h"
-#include "main.h"
 
 #ifdef CONFIG_SDRAM
 

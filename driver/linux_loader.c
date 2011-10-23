@@ -1,6 +1,4 @@
-#include "main.h"
-#include "debug.h"
-#include "dbgu.h"
+#include "common.h"
 #include "linux_tags.h"
 #include "dataflash.h"
 #include "nandflash.h"
@@ -128,12 +126,6 @@
 
 #define BIN_LOAD_ADDR (OS_MEM_BANK + 0x2000000)
 #define IMAGE_MAGIC 0x27051956
-
-size_t strlen(const char *str);
-
-char *strcpy(char *dst, const char *src);
-
-void *memcpy(void *dst, const void *src, size_t cnt);
 
 #if 0
 #ifndef CONFIG_THUMB

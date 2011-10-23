@@ -30,10 +30,7 @@
  * Creation            : ODi Apr 19th 2006
  *-----------------------------------------------------------------------------
  */
-#include "part.h"
-#include "main.h"
-#include "dbgu.h"
-#include "debug.h"
+#include "common.h"
 #include "dataflash.h"
 #include "gpio.h"
 #include "nandflash.h"

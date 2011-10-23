@@ -31,8 +31,7 @@
  * ODi Nov 9th         : dstp #3507 "Bad PIO descriptors in at91samxxxek.c"
  *-----------------------------------------------------------------------------
  */
-#include "part.h"
-#include "main.h"
+#include "common.h"
 
 void sbit(unsigned int bit, unsigned int adr)
 {

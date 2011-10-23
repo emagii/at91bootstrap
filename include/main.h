@@ -35,8 +35,6 @@
 #define _MAIN_H
 #include	<stdlib.h>
 
-typedef enum _BOOL { FALSE, TRUE } BOOL;
-
 #ifndef inline
 #define inline __inline
 #endif

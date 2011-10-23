@@ -34,21 +34,7 @@
 
 #else
 
-#include "part.h"
-#include "gpio.h"
-#include "pmc.h"
-#include "rstc.h"
-#include "dbgu.h"
-#include "debug.h"
-#include "main.h"
-#include "ddramc.h"
-#include "gpio.h"
-#ifdef CONFIG_NANDFLASH
-#include "nandflash.h"
-#endif
-#ifdef CONFIG_DATAFLASH
-#include "dataflash.h"
-#endif
+#include "board-support.h"
 
 int get_cp15(void);
 

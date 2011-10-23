@@ -30,9 +30,8 @@
  * Creation            : ODi Apr 24th 2006
  *-----------------------------------------------------------------------------
  */
-#include "../include/pmc.h"
-#include "../include/part.h"
-#include "../include/main.h"
+#include "common.h"
+#include "pmc.h"
 
 /* Write PMC register */
 static inline void write_pmc(unsigned int offset, const unsigned int value)

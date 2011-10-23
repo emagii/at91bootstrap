@@ -33,14 +33,10 @@
 //         Headers
 //------------------------------------------------------------------------------
 
+#include "common.h"
 #include "sdmmc_mci.h"
 
-#include "dbgu.h"
-#include "debug.h"
-
 #include "pio.h"
-
-#include <string.h>
 
 //------------------------------------------------------------------------------
 //         Global variables

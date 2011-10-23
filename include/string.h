@@ -1,9 +1,8 @@
 /* ----------------------------------------------------------------------------
  *         ATMEL Microcontroller Software Support  -  ROUSSET  -
  * ----------------------------------------------------------------------------
- * Copyright (c) 2007, Stelian Pop <stelian.pop@leadtechdesign.com>
- * Copyright (c) 2007 Lead Tech Design <www.leadtechdesign.com>
- *
+ * Copyright (c) 2011, Atmel Corporation
+
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,28 +25,24 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * ----------------------------------------------------------------------------
- * File Name           : norflash.c
- * Object              : ATMEL NorFlash High level functions
- * Creation            :
- *---------------------------------------------------------------------------
-*/
+ * File Name           : string.h
+ * Object              :
+ * Creation            : USa 2010-02-02
+ *-----------------------------------------------------------------------------
+ */
 
-#include "common.h"
-#include "flash.h"
+#ifndef _STRING_H
+#define _STRING_H
 
-#ifdef CONFIG_FLASH
+typedef unsigned int size_t;
 
-/*------------------------------------------------------------------------------*/
-/* \fn    load_df								*/
-/* \brief This function loads norflash content to specified address		*/
-/*------------------------------------------------------------------------------*/
-int load_norflash(unsigned int img_addr, unsigned int img_size,
-                  unsigned int img_dest)
-{
-    norflash_hw_init();
+void	*memcpy(void *dst, const void *src, int cnt);
+void	*memset(void *dst, int val, int cnt);
+int	 memcmp(const void *dst, const void *src, size_t cnt);
+size_t	 strlen(const char *str);
+char	*strcpy(char *dst, const char *src);
+int	 strcmp(const char *p1, const char *p2);
+int	 strncmp(const char *p1, const char *p2, size_t cnt);
 
-    memcpy((char *)img_dest, (char *)(AT91_NORFLASH_BASE + img_addr), img_size);
-    return 0;
-}
+#endif /* _STRING_H */
 
-#endif                          /* CONFIG_DATAFLASH */

@@ -33,16 +33,7 @@
 
 #else
 
-#include "part.h"
-#include "main.h"
-#include "gpio.h"
-#include "pmc.h"
-#include "rstc.h"
-#include "debug.h"
-#include "dbgu.h"
-#include "memory.h"
-#include "psram.h"
-#include "matrix.h"
+#include "board-support.h"
 
 int get_cp15(void);
 

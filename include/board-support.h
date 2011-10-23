@@ -1,16 +1,15 @@
 /* ----------------------------------------------------------------------------
  *         ATMEL Microcontroller Software Support  -  ROUSSET  -
  * ----------------------------------------------------------------------------
- * Copyright (c) 2007, Stelian Pop <stelian.pop@leadtechdesign.com>
- * Copyright (c) 2007 Lead Tech Design <www.leadtechdesign.com>
- *
+ * Copyright (c) 2011, Atmel Corporation
+
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
  * - Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the disclaiimer below.
+ * this list of conditions and the disclaimer below.
  *
  * Atmel's name may not be used to endorse or promote products derived from
  * this software without specific prior written permission.
@@ -26,28 +25,21 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * ----------------------------------------------------------------------------
- * File Name           : norflash.c
- * Object              : ATMEL NorFlash High level functions
- * Creation            :
- *---------------------------------------------------------------------------
-*/
+ * File Name           : board-support.h
+ * Object              :
+ * Creation            : USa Oct 23 2011
+ *-----------------------------------------------------------------------------
+ */
+
+#ifndef _BOARD_SUPPORT_H
+#define _BOARD_SUPPORT_H
 
 #include "common.h"
-#include "flash.h"
+#include "gpio.h"
+#include "pmc.h"
+#include "rstc.h"
+#include "memory.h"
+#include "matrix.h"
 
-#ifdef CONFIG_FLASH
+#endif
 
-/*------------------------------------------------------------------------------*/
-/* \fn    load_df								*/
-/* \brief This function loads norflash content to specified address		*/
-/*------------------------------------------------------------------------------*/
-int load_norflash(unsigned int img_addr, unsigned int img_size,
-                  unsigned int img_dest)
-{
-    norflash_hw_init();
-
-    memcpy((char *)img_dest, (char *)(AT91_NORFLASH_BASE + img_addr), img_size);
-    return 0;
-}
-
-#endif                          /* CONFIG_DATAFLASH */

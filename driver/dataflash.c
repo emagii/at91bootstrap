@@ -31,11 +31,9 @@
  *---------------------------------------------------------------------------
 */
 
-#include "part.h"
+#include "common.h"
 //#include "spi.h"
-#include "main.h"
 #include "dataflash.h"
-#include "debug.h"
 #include <stdlib.h>
 
 #if defined(CONFIG_DATAFLASH) || defined(CONFIG_DATAFLASHCARD)

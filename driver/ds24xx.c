@@ -27,11 +27,9 @@
  * ----------------------------------------------------------------------------
  */
 
-#include "part.h"
+#include "common.h"
 #include "gpio.h"
 #include "pmc.h"
-#include "main.h"
-#include "debug.h"
 #include "onewire_info.h"
 
 #define ROM_COMMAND_READ		0x33
@@ -84,13 +82,6 @@
 #define CM_VENDOR_OFFSET		5
 #define CM_REV_MASK			0x1F
 #define CM_REV_OFFSET			0
-
-size_t strlen(const char *str);
-extern char *strcpy(char *dst, const char *src);
-extern int strcmp(const char *p1, const char *p2);
-extern int strncmp(const char *p1, const char *p2, size_t cnt);
-extern void *memset(void *dst, int val, int cnt);
-extern void *memcpy(void *dst, const void *src, int cnt);
 
 static unsigned int sn = 0xffffffff;
 static unsigned int rev = 0xffffffff;

@@ -31,11 +31,8 @@
  * Creation            :
  *-----------------------------------------------------------------------------
  */
-#include "dbgu.h"
-#include "debug.h"
-#include "../include/part.h"
-#include "../include/main.h"
-#include "../include/ddramc.h"
+#include "common.h"
+#include "ddramc.h"
 
 #ifdef CONFIG_DDR2
 

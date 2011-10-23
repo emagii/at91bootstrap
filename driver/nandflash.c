@@ -30,10 +30,7 @@
  * Creation            : NLe Sep 28th 2006
  *-----------------------------------------------------------------------------
  */
-#include <stdlib.h>
-#include "part.h"
-#include "main.h"
-#include "debug.h"
+#include "common.h"
 
 #ifdef CONFIG_NANDFLASH
 

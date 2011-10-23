@@ -5,11 +5,9 @@
 /* disk I/O modules and attach it to FatFs module with common interface. */
 /*-----------------------------------------------------------------------*/
 
+#include "common.h"
 #include "diskio.h"
 #include "Media.h"
-#include "part.h"
-#include <string.h>
-#include <stdio.h>
 #include "integer.h"
 #include "fatfs_config.h"
 

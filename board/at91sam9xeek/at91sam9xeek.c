@@ -30,14 +30,7 @@
  * Creation            : NFe Feb 2nd 2007
  *-----------------------------------------------------------------------------
  */
-#include "part.h"
-#include "main.h"
-#include "gpio.h"
-#include "pmc.h"
-#include "rstc.h"
-#include "dbgu.h"
-#include "debug.h"
-#include "memory.h"
+#include "board-support.h"
 
 #ifndef CONFIG_THUMB
 static inline unsigned int get_cp15(void)

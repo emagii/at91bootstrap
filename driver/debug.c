@@ -30,12 +30,7 @@
  * Creation            : ODi Apr 19th 2006
  *-----------------------------------------------------------------------------
  */
-#include "part.h"
-#include "main.h"
-#include "dbgu.h"
-#include "debug.h"
-#include <stdio.h>
-#include <stdarg.h>
+#include "common.h"
 
 #ifdef	CONFIG_DEBUG
 

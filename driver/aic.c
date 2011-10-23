@@ -31,7 +31,8 @@
 //         Headers
 //------------------------------------------------------------------------------
 
-#include <board.h>
+//#include <board.h>
+#include "common.h"
 #include "irq.h"
 
 #ifndef AT91C_AIC_SRCTYPE_INT_HIGH_LEVEL

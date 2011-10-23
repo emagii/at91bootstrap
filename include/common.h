@@ -1,9 +1,8 @@
 /* ----------------------------------------------------------------------------
  *         ATMEL Microcontroller Software Support  -  ROUSSET  -
  * ----------------------------------------------------------------------------
- * Copyright (c) 2007, Stelian Pop <stelian.pop@leadtechdesign.com>
- * Copyright (c) 2007 Lead Tech Design <www.leadtechdesign.com>
- *
+ * Copyright (c) 2010, Atmel Corporation
+
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,28 +25,28 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * ----------------------------------------------------------------------------
- * File Name           : norflash.c
- * Object              : ATMEL NorFlash High level functions
- * Creation            :
- *---------------------------------------------------------------------------
-*/
+ * File Name           : common.h
+ * Object              :
+ * Creation            : USa 2010-02-02
+ *-----------------------------------------------------------------------------
+ */
 
-#include "common.h"
-#include "flash.h"
+#ifndef _COMMON_H
+#define _COMMON_H
 
-#ifdef CONFIG_FLASH
+#if	0
+#include	<stdio.h>
+#include	<stdlib.h>
+#endif
 
-/*------------------------------------------------------------------------------*/
-/* \fn    load_df								*/
-/* \brief This function loads norflash content to specified address		*/
-/*------------------------------------------------------------------------------*/
-int load_norflash(unsigned int img_addr, unsigned int img_size,
-                  unsigned int img_dest)
-{
-    norflash_hw_init();
+#include	<stdarg.h>
+#include	"autoconf.h"
+#include	"integer.h"
+#include	"part.h"
+#include	"main.h"
+#include	"debug.h"
+#include	"dbgu.h"
+#include	"string.h"
 
-    memcpy((char *)img_dest, (char *)(AT91_NORFLASH_BASE + img_addr), img_size);
-    return 0;
-}
+#endif /* _COMMON_H */
 
-#endif                          /* CONFIG_DATAFLASH */

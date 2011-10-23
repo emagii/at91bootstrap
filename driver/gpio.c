@@ -30,10 +30,9 @@
  * Creation            : ODi Apr 19th 2006
  *-----------------------------------------------------------------------------
  */
-#include "part.h"
-#include "main.h"
+
+#include "common.h"
 #include "gpio.h"
-#include "debug.h"
 
 #define EINVAL 1                /* Error code returned when the PIN is unknown */
 

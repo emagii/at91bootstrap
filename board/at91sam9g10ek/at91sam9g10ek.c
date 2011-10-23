@@ -34,14 +34,7 @@
 
 #else
 
-#include "part.h"
-#include "main.h"
-#include "gpio.h"
-#include "pmc.h"
-#include "rstc.h"
-#include "dbgu.h"
-#include "debug.h"
-#include "memory.h"
+#include "board-support.h"
 
 int get_cp15(void);
 

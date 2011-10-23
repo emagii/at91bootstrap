@@ -32,11 +32,9 @@
 //------------------------------------------------------------------------------
 //         Headers
 //------------------------------------------------------------------------------
-#include "part.h"
+#include "common.h"
 #include "MEDSdcard.h"
 #include "fatfs_config.h"
-#include "dbgu.h"
-#include "debug.h"
 
 #include "irq.h"
 #include "pio.h"
@@ -45,8 +43,6 @@
 #if defined(MCI2_INTERFACE)
 #include "dmad.h"
 #endif
-
-#include <string.h>
 
 extern	unsigned int altboot;
 

@@ -30,9 +30,7 @@
  * Creation            : Hong Apr 6th 2010
  *-----------------------------------------------------------------------------
  */
-#include "part.h"
-#include "main.h"
-#include "dbgu.h"
+#include "common.h"
 
 #ifdef CONFIG_DEBUG
 /* Write DBGU register */

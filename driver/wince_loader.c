@@ -1,6 +1,4 @@
-#include "main.h"
-#include "debug.h"
-#include "dbgu.h"
+#include "common.h"
 #include "dataflash.h"
 #include "nandflash.h"
 

@@ -6,6 +6,10 @@
 #endif
 #ifdef	CONFIG_DDR2
 #include "ddr2.h"
+#include "ddramc.h"
+#endif
+#ifdef CONFIG_PSRAM
+#include "psram.h"
 #endif
 #ifdef CONFIG_NANDFLASH
 #include "nandflash.h"
@@ -16,3 +20,4 @@
 #ifdef CONFIG_FLASH
 #include "flash.h"
 #endif
+

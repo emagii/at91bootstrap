@@ -31,13 +31,7 @@
  * ODi Nov 9th         : dstp #3507 "Bad PIO descriptors in at91samxxxek.c"
  *-----------------------------------------------------------------------------
  */
-#include "part.h"
-#include "main.h"
-#include "gpio.h"
-#include "pmc.h"
-#include "rstc.h"
-#include "debug.h"
-#include "memory.h"
+#include "board-support.h"
 
 #ifndef CONFIG_THUMB
 static inline unsigned int get_cp15(void)

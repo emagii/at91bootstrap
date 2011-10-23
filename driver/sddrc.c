@@ -31,9 +31,8 @@
  * Creation            :
  *-----------------------------------------------------------------------------
  */
-#include "../include/sddrc.h"
-#include "../include/part.h"
-#include "../include/main.h"
+#include "common.h"
+#include "sddrc.h"
 
 #ifdef CONFIG_SDDRC
 

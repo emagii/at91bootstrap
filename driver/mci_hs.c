@@ -33,13 +33,11 @@
 
 #if defined(CONFIG_SDCARD_HS)
 
+#include "common.h"
 #include "mci_hs.h"
 
 #include "dmad.h"
 #include "dma.h"
-
-#include "dbgu.h"
-#include "debug.h"
 
 //------------------------------------------------------------------------------
 //         Local constants

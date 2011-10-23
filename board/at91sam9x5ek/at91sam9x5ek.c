@@ -34,18 +34,7 @@
 
 #else
 
-#include "part.h"
-#include "gpio.h"
-#include "pmc.h"
-#include "rstc.h"
-#include "dbgu.h"
-#include "debug.h"
-#include "main.h"
-#include "ddramc.h"
-
-#ifdef CONFIG_NANDFLASH
-#include "nandflash.h"
-#endif
+#include "board-support.h"
 
 #include "onewire_info.h"
 

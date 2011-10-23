@@ -70,11 +70,9 @@
 /                   Added proper case conversion to extended char.
 /---------------------------------------------------------------------------*/
 
+#include "common.h"
 #include "ff.h"                 /* FatFs configurations and declarations */
 #include "diskio.h"             /* Declarations of low level disk I/O functions */
-#include "dbgu.h"
-#include "debug.h"
-#include "part.h"
 /*--------------------------------------------------------------------------
 
    Module Private Definitions
@@ -151,15 +149,6 @@ WORD LfnBuf[_MAX_LFN + 1];
 /*-----------------------------------------------------------------------*/
 /* String functions                                                      */
 /*-----------------------------------------------------------------------*/
-
-/* Copy memory to memory */
-extern void* memcpy(void *dst, const void *src, int cnt);
-
-/* Fill memory */
-extern void* memset(void *dst, int val, int cnt);
-
-/* Compare memory to memory */
-extern int memcmp(const void *dst, const void *src, int cnt);
 
 /* Check if chr is contained in the string */
 static

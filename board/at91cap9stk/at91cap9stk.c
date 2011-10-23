@@ -31,13 +31,7 @@
  * Creation            :
  *-----------------------------------------------------------------------------
  */
-#include "part.h"
-#include "gpio.h"
-#include "pmc.h"
-#include "rstc.h"
-#include "debug.h"
-#include "memory.h"
-#include "main.h"
+#include "board-support.h"
 
 #ifndef CONFIG_THUMB
 static inline unsigned int get_cp15(void)

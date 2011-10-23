@@ -30,9 +30,8 @@
  * Creation            :
  *-----------------------------------------------------------------------------
  */
-#include "../include/ddr2.h"
-#include "../include/part.h"
-#include "../include/main.h"
+#include "common.h"
+#include "ddr2.h"
 
 #ifdef CONFIG_DDR2
 
