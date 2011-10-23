@@ -1,28 +1,30 @@
 #!/bin/sh
 
 # Support Ubuntu ARM C compiler
-export	CROSS_COMPILE?=/usr/bin/arm-linux-gnueabi-
+export	CROSS_COMPILE=/usr/bin/arm-linux-gnueabi-
 
+init_make ()
+{
+	rm	-f	binaries/*
+	rm	-rf	log
+	rm	-fr	result
 
-rm	-f	binaries/*
-rm	-rf	log
-rm	-fr	result
+	mkdir	-p	log
+	mkdir	-p	result/FAIL
+	mkdir	-p	result/OK
+	mkdir	-p	result/binaries
+	mkdir	-p	result
+	mkdir	-p	result/map
+	mkdir	-p	result/elf
 
-mkdir	-p	log
-mkdir	-p	result/FAIL
-mkdir	-p	result/OK
-mkdir	-p	result/binaries
-mkdir	-p	result
-mkdir	-p	result/map
-mkdir	-p	result/elf
-
-source	./mk-config-list.sh
+	source	./mk-config-list.sh
+}
 
 build ()
 {
 	make distclean
-	make $1_defconfig
-	make > log/$1.log 2>&1 || mv log/$1.log result/FAIL/$1.log.FAIL
+	make -j 4 $1_defconfig
+	make -j 4 > log/$1.log 2>&1 || mv log/$1.log result/FAIL/$1.log.FAIL
 	mv log/$1.log result/OK/$1.log.OK	|| echo
 	mv binaries/*.elf	result/elf
 	mv binaries/*.map	result/map
@@ -35,6 +37,8 @@ build_all ()
 		build	$f
 	done
 }
+
+init_make
 
 build_all
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 # Support Ubuntu ARM C compiler
-export	CROSS_COMPILE?=/usr/bin/arm-linux-gnueabi-
+export	CROSS_COMPILE=/usr/bin/arm-linux-gnueabi-
 
 source	./mk-config-list.sh
 

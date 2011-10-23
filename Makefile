@@ -430,7 +430,6 @@ distclean: clean config-clean
 	rm -f .installed
 	rm -f ..*.tmp
 	rm -f .configured
-	rm -fr result
 	rm -fr *.patch
 	rm -fr patches
 
