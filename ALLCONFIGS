@@ -1,0 +1,25 @@
+#!/bin/sh
+# Support Ubuntu ARM C compiler
+export	CROSS_COMPILE?=/usr/bin/arm-linux-gnueabi-
+
+source	./mk-config-list.sh
+
+reconfig ()
+{
+	make	$1_defconfig
+	make	oldconfig
+	make	CROSS_COMPILE=arm-linux- update
+}
+
+reconfig_all ()
+{
+	for f in `cat $CONFIG_LIST` ; do
+		reconfig	$f
+	done
+}
+
+reconfig_all
+
+echo
+echo
+echo "### Done!"
