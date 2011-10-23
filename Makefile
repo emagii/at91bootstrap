@@ -88,8 +88,11 @@ else
 ##  Have DOT Config
 #
 
+nocompile_targets:= distrib config-clean clean distclean mrproper
+ifeq ($(filter $(nocompile_targets),$(MAKECMDGOALS)),)
 ifeq ($(CROSS_COMPILE),)
 $(error Environment variable "CROSS_COMPILE" must be defined!)
+endif
 endif
 
 AS=$(CROSS_COMPILE)gcc
