@@ -26,9 +26,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * ----------------------------------------------------------------------------
  */
-
+#pragma GCC diagnostic ignored "-Wunused-function"
 #if defined(CONFIG_SDCARD)
-
 //------------------------------------------------------------------------------
 //         Headers
 //------------------------------------------------------------------------------
@@ -2197,14 +2196,15 @@ static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
 
     unsigned char cmd8Retries = 1;
 
-    unsigned int cmd1Retries = 10000;   //120;
 
     unsigned char isHdSupport = 0;
+#if !(defined(CONFIG_AT91SAM9G10EK))
+    unsigned int cmd1Retries = 10000;   //120;
 
     unsigned char isHsSupport = 0;
 
     unsigned char updateInformation = 0;
-
+#endif
     // The command GO_IDLE_STATE (CMD0) is the software reset command and sets
     // card into Idle State regardless of the current card state.
     MCI_EnableHsMode((Mci *) pSdDriver, 0);
@@ -2339,6 +2339,10 @@ static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
 
         dbg_log(1, "Is card MMC one?\n\r");
 
+// busWidth gives warnings
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+
         if (SD_CSD_STRUCTURE(pSd) >= 2) {
 
             MmcCmd6Arg cmd6Arg;
@@ -2399,6 +2403,7 @@ static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
             }
 #endif                          // end of OP_BOOTSTRAP_MCI_on
         }
+#pragma GCC diagnostic pop
     } else if (pSd->cardType >= CARD_SD) {
 
         // Switch to 4-bits bus width

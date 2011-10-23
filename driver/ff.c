@@ -69,7 +69,7 @@
 /                   Added f_chdir() and f_chdrive().
 /                   Added proper case conversion to extended char.
 /---------------------------------------------------------------------------*/
-
+#pragma GCC diagnostic ignored "-Wunused-function"
 #include "common.h"
 #include "ff.h"                 /* FatFs configurations and declarations */
 #include "diskio.h"             /* Declarations of low level disk I/O functions */

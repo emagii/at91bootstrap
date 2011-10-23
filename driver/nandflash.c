@@ -677,9 +677,12 @@ int read_nandflash(unsigned char *dst, unsigned long offset, int len)
 
     unsigned char *pOutBuffer = dst;
 
-    unsigned int blockIdx, badBlock, length, sizeToRead, nbSector, sectorIdx,
+    unsigned int blockIdx, length, sizeToRead, nbSector, sectorIdx,
         dataLeft;
 
+#if	!defined(REMOVE_WARNINGS)
+    unsigned int	badBlock;
+#endif
     nandflash_hw_init();
     reset_nandflash();
 
@@ -737,10 +740,13 @@ int read_nandflash(unsigned char *dst, unsigned long offset, int len)
      * Initialize the block offset 
      */
     blockIdx = offset / sNandInfo.uBlockNbData;
+
+#if	!defined(REMOVE_WARNINGS)
     /*
      * Initialize the number of bad blocks 
      */
     badBlock = 0;
+#endif
 
     length = len;
 

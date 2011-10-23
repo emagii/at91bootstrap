@@ -30,6 +30,7 @@
  * Creation            : ODi Apr 19th 2006
  *-----------------------------------------------------------------------------
  */
+#pragma GCC diagnostic ignored "-Wunused-function"
 #include "common.h"
 
 #ifdef	CONFIG_DEBUG

@@ -30,6 +30,7 @@
 //------------------------------------------------------------------------------
 //         Headers
 //------------------------------------------------------------------------------
+#pragma GCC diagnostic ignored "-Wunused-function"
 #include "common.h"
 #include "pio.h"
 
@@ -460,3 +461,5 @@ unsigned char PIO_GetOutputDataStatus(const Pin * pin)
     }
 }
 #endif
+
+

@@ -340,7 +340,6 @@ void sdramc_hw_init(void)
 #ifdef CONFIG_PSRAM
 void psram_hw_init(void)
 {
-    volatile unsigned short tmp;
 
     unsigned short *addressMax = (unsigned short *)MICRON_8MB_ADDRESS_MAX;
 
@@ -373,8 +372,10 @@ void psram_hw_init(void)
     pio_set_value(AT91C_PIN_PE(16), 0); // Data access.
 
     //Enable page mode
-    tmp = readl(addressMax);
-    tmp = readl(addressMax);
+    // "readl" is a function, but we do not need the result
+    // The read will update the internal status of the memory.
+    readl(addressMax);
+    readl(addressMax);
     writel(MICRON_RCR, addressMax);
     writel(MICRON_PAGE_MODE_ENABLE, addressMax);
 }

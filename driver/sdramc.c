@@ -30,6 +30,7 @@
  * Creation            : NLe Jul 11th 2006
  *-----------------------------------------------------------------------------
  */
+#pragma GCC diagnostic ignored "-Wunused-function"
 #include "common.h"
 #include "sdramc.h"
 

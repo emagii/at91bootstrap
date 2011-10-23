@@ -225,7 +225,7 @@ static unsigned char MEDSdcard_Read(Media * media,
                                     unsigned int length,
                                     MediaCallback callback, void *argument)
 {
-    unsigned char error;
+    unsigned char error=0;
 
     unsigned int loop;
 
@@ -251,6 +251,11 @@ static unsigned char MEDSdcard_Read(Media * media,
         error =
             SD_ReadBlock((SdCard *) media->interface, address,
                          FIRSTBOOT_BLOCK_LENGTH, data);
+#if	defined(REMOVE_WARNINGS)
+	if(error) {
+		dbg_log(1, "SD_ReadBlock failed in MEDSdcard_Read\r\n");
+	}
+#endif
         address += FIRSTBOOT_BLOCK_LENGTH;
 
         length -= FIRSTBOOT_BLOCK_LENGTH;
@@ -265,6 +270,11 @@ static unsigned char MEDSdcard_Read(Media * media,
     if (length > 0) {
         error =
             SD_ReadBlock((SdCard *) media->interface, address, length, data);
+#if	defined(REMOVE_WARNINGS)
+	if(error) {
+		dbg_log(1, "SD_ReadBlock failed in MEDSdcard_Read\r\n");
+	}
+#endif
     }
     // Leave the Busy state
     media->state = MED_STATE_READY;
@@ -684,7 +694,9 @@ unsigned int load_SDCard(void *dst)
     unsigned char ret;
 
     ret = MEDSdcard_Initialize(&medias[0], BOARD_SD_MCI_ID_USE);
-
+    if(ret) {
+	dbg_log(1, "Error while initializing SD-Card\r\n");
+    }
     memset(&fs, 0, sizeof (FATFS));     // Clear file system object    
 
     res = f_mount(0, &fs);
