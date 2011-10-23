@@ -48,6 +48,14 @@
 
 #include <string.h>
 
+extern	unsigned int altboot;
+
+#if defined(CONFIG_DUAL_BOOT)
+#define	IMAGE_NAME	altboot?ALT_IMAGE_NAME:OS_IMAGE_NAME
+#else
+#define	IMAGE_NAME	OS_IMAGE_NAME
+#endif
+
 //------------------------------------------------------------------------------
 //         Constants
 //------------------------------------------------------------------------------
@@ -689,10 +697,10 @@ unsigned int load_SDCard(void *dst)
         while (1) ;
     }
 
-    res = f_open(&fileObject, OS_IMAGE_NAME, FA_OPEN_EXISTING | FA_READ);
+    res = f_open(&fileObject, IMAGE_NAME, FA_OPEN_EXISTING | FA_READ);
 
     if (res != FR_OK) {
-        dbg_log(1, "*** f_open, File name: [%s]: error!\n\r", OS_IMAGE_NAME);
+	dbg_log(1, "*** f_open, File name: [%s]: error!\n\r", IMAGE_NAME);
         while (1) ;
     }
 

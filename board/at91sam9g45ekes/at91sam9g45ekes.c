@@ -42,6 +42,7 @@
 #include "debug.h"
 #include "main.h"
 #include "ddramc.h"
+#include "gpio.h"
 #ifdef CONFIG_NANDFLASH
 #include "nandflash.h"
 #endif
@@ -56,6 +57,35 @@ void set_cp15(unsigned int value);
 int get_cpsr(void);
 
 void set_cpsr(unsigned int value);
+
+
+/*------------------------------------------------------------------------------*/
+/* \fn    alternate_boot							*/
+/* \brief This function returns 1 if LEFT BUTTON is pressed			*/
+/*        during boot sequence							*/
+/*------------------------------------------------------------------------------*/
+int alternate_boot_button(void)
+{
+	/* Configure PIOs */
+	const struct pio_desc button_pio[] = {
+		{"LEFT", LEFT_BUTTON, 0, PIO_PULLUP, PIO_INPUT},
+		{(char *) 0, 0, 0, PIO_DEFAULT, PIO_PERIPH_A},
+	};
+
+	/* Configure PIO B controller */
+	writel((1 << AT91C_ID_PIOB), PMC_PCER + AT91C_BASE_PMC);
+	pio_setup(button_pio);
+
+	/* Return "1" if LEFT BUTTON is pressed during Boot sequence */
+	dbgu_print("Checking for Alternate boot: ...\n\r");
+	if ( !pio_get_value(LEFT_BUTTON) ) {
+		dbgu_print("[Alternate]\n\r");		
+		return 1;
+	} else {
+		dbgu_print("[Normal]\n\r");		
+		return 0;
+	}
+}
 
 #ifdef CONFIG_SCLK
 void sclk_enable(void)

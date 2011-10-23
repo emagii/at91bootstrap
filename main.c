@@ -35,6 +35,7 @@
 #include "dbgu.h"
 #include "debug.h"
 #include "dataflash.h"
+#include "gpio.h"
 #include "nandflash.h"
 #include "flash.h"
 
@@ -50,6 +51,11 @@ extern unsigned int load_SDCard(void *dst);
 void LoadLinux();
 
 void LoadWince();
+
+unsigned int	img_address	= IMG_ADDRESS;
+unsigned int	img_size	= IMG_SIZE;
+unsigned int	jump_addr	= JUMP_ADDR;
+unsigned int	altboot		= 0;
 
 /*------------------------------------------------------------------------------*/
 /* Function Name       : Wait							*/
@@ -95,40 +101,47 @@ int main(void)
     load_1wire_info();
 #endif
 
+/* Check if we want to boot the alternate image */
+#if defined(CONFIG_DUAL_BOOT)
+    if(alternate_boot_button()) {
+	dbg_log(1, "Downloading Alternate image...\r\n");
+	img_address	= ALT_IMG_ADDRESS;
+	img_size	= ALT_IMG_SIZE;
+	jump_addr	= ALT_JUMP_ADDR;
+	altboot=1;
+    } else {
+	dbg_log(1, "Downloading image...\n\r");
+    }
+#else
     dbg_log(1, "Downloading image...\n\r");
+#endif
 
 #if defined(CONFIG_LOAD_LINUX)
     LoadLinux();
 #elif defined(CONFIG_LOAD_NK) || defined(CONFIG_LOAD_EBOOT)
     LoadWince();
-#else
 /* Booting stand-alone application, e.g. U-Boot */
-#if defined (CONFIG_DATAFLASH)
-    load_df(AT91C_SPI_PCS_DATAFLASH, IMG_ADDRESS, IMG_SIZE, JUMP_ADDR);
+#elif defined (CONFIG_DATAFLASH)
+    load_df(AT91C_SPI_PCS_DATAFLASH, img_address, img_size, jump_addr);
 #elif defined(CONFIG_NANDFLASH)
-    read_nandflash((unsigned char *)JUMP_ADDR, (unsigned long)IMG_ADDRESS,
-        (int)IMG_SIZE);
+    read_nandflash((unsigned char *)jump_addr, (unsigned long)img_address, (int)img_size);
 #elif defined(CONFIG_SDCARD)
-    load_SDCard((void *)JUMP_ADDR);
+    load_SDCard((void *)jump_addr);
+#elif CONFIG_FLASH
+    load_norflash(img_address, img_size, jump_addr);
 #else
 #error "No booting media specified!"
 #endif
 
-#endif
-
     dbg_log(1, "Done!\n\r");
 
+#ifdef	CONFIG_LOAD_NK
+    jump_addr += 0x1000;
+#endif
+
 #ifdef WINCE
-#ifdef CONFIG_LOAD_NK
-    Jump(JUMP_ADDR + 0x1000);
-#else
-    Jump(JUMP_ADDR);
-#endif
+    Jump(jump_addr);
 #else                           /* !WINCE */
-#ifdef CONFIG_LOAD_NK
-    return (JUMP_ADDR + 0x1000);
-#else
-    return JUMP_ADDR;
-#endif
+    return jump_addr;
 #endif
 }

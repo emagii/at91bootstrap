@@ -117,7 +117,15 @@ IMG_ADDRESS := $(strip $(subst ",,$(CONFIG_IMG_ADDRESS)))
 
 IMG_SIZE := $(strip $(subst ",,$(CONFIG_IMG_SIZE)))
 
+ALT_IMG_ADDRESS :=$(strip $(subst ",,$(CONFIG_ALT_IMG_ADDRESS)))
+
+ALT_IMG_SIZE :=$(strip $(subst ",,$(CONFIG_ALT_IMG_SIZE)))
+
+ALT_IMAGE_NAME :=$(strip $(subst ",,$(CONFIG_ALT_IMAGE_NAME)))
+
 JUMP_ADDR := $(strip $(subst ",,$(CONFIG_JUMP_ADDR)))
+
+ALT_JUMP_ADDR := $(strip $(subst ",,$(CONFIG_ALT_JUMP_ADDR)))
 
 BOOTSTRAP_MAXSIZE := $(strip $(subst ",,$(CONFIG_BOOTSTRAP_MAXSIZE)))
 

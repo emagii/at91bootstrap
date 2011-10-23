@@ -75,6 +75,33 @@ config CONFIG_LOAD_4MB
 
 endchoice
 
+config CONFIG_DUAL_BOOT
+	bool "Support dual application boot"
+	depends on ALLOW_DUAL_BOOT
+	default	n
+	help
+	  Allow booting a secondary application if a button is pressed
+
+config CONFIG_ALT_IMG_ADDRESS
+	string
+	default "0x00040000" if CONFIG_FLASH
+	default "0x00063000" if CONFIG_DATAFLASH
+	default "0x00040000" if CONFIG_NANDFLASH
+	default	"0x00000000" if CONFIG_SDCARD
+	help
+	  Where the secondary application is stored.
+
+config CONFIG_ALT_IMG_SIZE
+	string
+	default	"0x00010000"
+	help
+	  at91bootstrap will copy this amount of data
+
+config CONFIG_ALT_IMAGE_NAME
+	depends on CONFIG_SDCARD && CONFIG_DUAL_BOOT
+	string "Binary Name on SD Card"
+	default "program.bin"
+
 #
 # Linux Image Storage Setup
 #
@@ -314,6 +341,17 @@ config CONFIG_JUMP_ADDR
 	help
 	  The entry point to which the bootstrap will pass control.
 
+config CONFIG_ALT_JUMP_ADDR
+	string
+	default "0x70000000" if CONFIG_AT91CAP9ADK
+	default "0x70000000" if CONFIG_AT91SAM9G45EK
+	default "0x70000000" if CONFIG_AT91SAM9M10EK
+	default "0x70000000" if CONFIG_AT91SAM9M10EKES
+	default "0x70000000" if CONFIG_AT91SAM9G45EKES
+	default "0x20000000"
+	help
+	  The entry point to which the bootstrap will pass control.
+
 config CONFIG_GLBDRV_ADDR
 	string
 	default "0x70000000" if CONFIG_AT91CAP9ADK
@@ -331,7 +369,7 @@ config CONFIG_GLBDRV_ADDR
 	default "0x20068000" if CONFIG_AT91SAM9X5EK
 	default "0x23F00000"
 	help
-	
+
 config CONFIG_LONG_TEST
 	bool "Perform a memory test at startup"
 	default n
@@ -352,6 +390,9 @@ config CONFIG_DEBUG_LOUD
 config CONFIG_DEBUG_VERY_LOUD
 	bool "Even louder debug output"
 endchoice
+
+config ALLOW_DUAL_BOOT
+	bool
 
 config CONFIG_HW_INIT
 	bool "Call Hardware Initialization"

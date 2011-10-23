@@ -76,4 +76,8 @@ extern int pio_set_gpio_output(unsigned pin, int value);
 #define	AT91C_PIN_PD(io)	(3 * PIO_NB_IO + io)
 #define	AT91C_PIN_PE(io)	(4 * PIO_NB_IO + io)
 
+#if defined(CONFIG_DUAL_BOOT)
+extern	int	alternate_boot_button(void);
+#endif
+
 #endif                          /* GPIO_H_ */
