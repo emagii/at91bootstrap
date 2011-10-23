@@ -211,9 +211,9 @@ SX_AT91=$(BINDIR)/sx-at91
 EXTRA_INSTALL+=$(BINDIR)/sx-at91
 endif
 
-COBJS-y:= $(TOPDIR)/main.o $(TOPDIR)/board/$(BOARDNAME)/$(BOARD).o
+COBJS-y:= $(TOPDIR)/main.o $(TOPDIR)/board/$(BOARD)/$(BOARD).o
 SOBJS-y:= $(TOPDIR)/crt0_gnu.o
-DIRS:=$(TOPDIR) $(TOPDIR)/board/$(BOARDNAME) $(TOPDIR)/lib $(TOPDIR)/driver
+DIRS:=$(TOPDIR) $(TOPDIR)/board/$(BOARD) $(TOPDIR)/lib $(TOPDIR)/driver
 
 
 include 	lib/libc.mk
