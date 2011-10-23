@@ -21,3 +21,5 @@ binaries
 *.o
 tags
 *.swp
+install/*
+
