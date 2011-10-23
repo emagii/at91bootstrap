@@ -23,4 +23,5 @@ tags
 *.swp
 install/*
 *.rej
+*.patch
 
