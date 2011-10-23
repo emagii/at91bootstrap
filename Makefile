@@ -19,7 +19,7 @@ BINDIR:=$(TOPDIR)/binaries
 
 DATE:=$(shell date +%Y%m%d)
 
-VERSION:=3.1.1
+VERSION:=3.1
 
  
 noconfig_targets:= menuconfig defconfig $(CONFIG) oldconfig
@@ -430,6 +430,9 @@ distclean: clean config-clean
 	rm -f .installed
 	rm -f ..*.tmp
 	rm -f .configured
+	rm -fr result
+	rm -fr *.patch
+	rm -fr patches
 
 mrproper: distclean
 	rm -fr $(BINDIR)
