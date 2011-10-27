@@ -3049,6 +3049,8 @@
 
 #define CHIP_SRAM0_BASEADDR		0x200000
 
+#if	!defined(CONFIG_AT91SAM9G20EK)
 #define NO_PATITION
+#endif
 
 #endif                          /* AT91SAM9260_INC_H */
