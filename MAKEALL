@@ -1,11 +1,12 @@
 #!/bin/sh
 
 # Support Ubuntu ARM C compiler
-export	CROSS_COMPILE=/usr/bin/arm-linux-gnueabi-
+
+source	./toolset.sh
 
 init_make ()
 {
-	rm	-f	binaries/*
+	rm	-rf	binaries/*
 	rm	-rf	log
 	rm	-fr	result
 
@@ -17,7 +18,7 @@ init_make ()
 	mkdir	-p	result/map
 	mkdir	-p	result/elf
 
-	source	./mk-config-list.sh
+	source	./scripts/mk-config-list.sh
 }
 
 build ()

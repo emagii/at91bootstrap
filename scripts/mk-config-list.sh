@@ -1,5 +1,5 @@
 #!/bin/sh
-export	CONFIG_LIST=allboards.cfg
+export	CONFIG_LIST=board/allboards.cfg
 
 mk_config ()
 {

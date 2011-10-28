@@ -1,46 +1,98 @@
 #!/bin/sh
-rm -rf log
-mkdir -p log/FAIL
-skip=0
-rm -f .config
 
-if [ -f ../gcc.sh ] ; then
-source ../gcc.sh
-else
-	echo "You need to supply a good Makefile environment similar to:"
-	cat gcc.sh
-	exit 0
-fi
+# Support Ubuntu ARM C compiler
+export	CROSS_COMPILE=/usr/bin/arm-linux-gnueabi-
 
-MAKEFLAGS="CROSS_COMPILE=${CROSS_COMPILE} CONFIG_NO_DWARF_CFI_ASM=y"
+CONFIG_LIST="\
+	at91sam9x5df		\
+	at91sam9x5ek		\
+	at91sam9x5nf		\
+	at91sam9x5sd		\
+	at91sam9x5sd_uboot	\
+	at91sam9g20ek_2mmcsd	\
+"
+SD_BOARDS="\
+	at91sam9g10sd		\
+	at91sam9g20ek_2mmcsd	\
+	at91sam9g20sd		\
+	at91sam9g45sd		\
+	at91sam9g45sdes_android	\
+	at91sam9g45sdes		\
+	at91sam9m10sd_android	\
+	at91sam9m10sd		\
+	at91sam9m10sdu		\
+	at91sam9m10sdes		\
+	at91sam9rlsd		\
+	at91sam9x5sd		\
+	at91sam9x5sd_uboot	\
+	"
 
-function build()
+init_make ()
 {
-	if [ ${skip} == "0" ] ; then
-		rm .config
-		make $1_defconfig
-		make menuconfig
-		make BOARD=$2 update
-#		make ${MAKEFLAGS}	> log/$1.log 2>&1 || mv log/$1.log log/FAIL/$1.log.FAIL
-	fi
+	rm	-f	binaries/*
+	rm	-rf	log
+	rm	-fr	result
+
+	mkdir	-p	log
+	mkdir	-p	result/FAIL
+	mkdir	-p	result/OK
+	mkdir	-p	result/binaries
+	mkdir	-p	result
+	mkdir	-p	result/map
+	mkdir	-p	result/elf
+
+
 }
 
+build ()
+{
+	printf	"%-30s"	"$1"
+	make -s distclean > /dev/null
+	make -j 8 -s $1_defconfig	> /dev/null
+#	make	menuconfig
+#	make	update			> /dev/null
+	sts=0
+	make -j 8 > log/$1.log 2>&1 3>log/$1.info	|| sts=1
+	if [ $sts == 0 ] ; then
+		mv log/$1.log result/OK/$1.log.OK
+		working=`expr $working + 1`
+		printf	"[OK]"
+		# "arning" supports English and Swedish !
+		warning_lines=`cat result/OK/$1.log.OK | grep arning | wc -l`
+		if ! [ $warning_lines == 0 ] ; then
+			printf "[Warnings]"
+		fi
+		echo
+	else
+		mv log/$1.log result/FAIL/$1.log.FAIL
+		failing=`expr $failing + 1`
+		echo	"[FAIL]"
+	fi
+	mv binaries/*.elf	result/elf
+	mv binaries/*.map	result/map
+	mv binaries/*.bin	result/binaries
+}
 
-if [ "$1" == "" ] ; then
-build	at91sam9g45ek	at91sam9g45ek
-build	at91sam9g45df	at91sam9g45ek
-build	at91sam9g45nf	at91sam9g45ek
+build_all ()
+{
+	failing=0;
+	working=0;
+	for f in $CONFIG_LIST ; do
+		build	$f
+	done
+	printf	"%s\n"	"------------------------------------"
+	total=`expr	$working + $failing`
+	printf	"%-30s[%d]\n"	"Number of Boards:"	$total
+	printf	"\n"
+	printf	"%-30s[%d]\n"	"Working Boards:"	$working
+	printf	"%-30s[%d]\n"	"Failing Boards:"	$failing
+}
 
-build	at91sam9g45dfes	at91sam9g45ekes
-build	at91sam9g45nfes	at91sam9g45ekes
+init_make
 
-build	at91sam9m10ek	at91sam9m10ek
-build	at91sam9m10df	at91sam9m10ek
-build	at91sam9m10nf	at91sam9m10ek
+time	build_all
 
+echo
+echo
+echo "### Done!"
 
-else
-
-build	$1
-
-fi

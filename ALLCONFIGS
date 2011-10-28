@@ -2,7 +2,7 @@
 # Support Ubuntu ARM C compiler
 export	CROSS_COMPILE=/usr/bin/arm-linux-gnueabi-
 
-source	./mk-config-list.sh
+source	./scripts/mk-config-list.sh
 
 reconfig ()
 {
