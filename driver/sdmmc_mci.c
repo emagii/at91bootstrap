@@ -2188,6 +2188,9 @@ unsigned char SD_WriteBlock(SdCard * pSd,
 /// \param pSd  Pointer to a SD card driver instance.
 /// \param pSdDriver  Pointer to SD driver already initialized
 //------------------------------------------------------------------------------
+// busWidth gives warnings
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
 {
     unsigned char isCCSet;
@@ -2339,10 +2342,6 @@ static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
 
         dbg_log(1, "Is card MMC one?\n\r");
 
-// busWidth gives warnings
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
-
         if (SD_CSD_STRUCTURE(pSd) >= 2) {
 
             MmcCmd6Arg cmd6Arg;
@@ -2403,7 +2402,6 @@ static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
             }
 #endif                          // end of OP_BOOTSTRAP_MCI_on
         }
-#pragma GCC diagnostic pop
     } else if (pSd->cardType >= CARD_SD) {
 
         // Switch to 4-bits bus width
@@ -2479,6 +2477,7 @@ static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
 #endif
     return 0;
 }
+#pragma GCC diagnostic pop
 
 //------------------------------------------------------------------------------
 /// Run the SDcard initialization sequence. This function runs the
