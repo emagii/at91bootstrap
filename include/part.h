@@ -60,7 +60,12 @@
 
 #ifdef AT91SAM9G20
 #include "AT91SAM9260_inc.h"
+#ifdef	CONFIG_AT91SAM9G20EK
 #include "at91sam9g20ek.h"
+#endif
+#ifdef	CONFIG_AT91SAM9G20EK_2MMC
+#include "at91sam9g20ek_2mmc.h"
+#endif
 #endif
 
 #ifdef AT91SAM9G45
