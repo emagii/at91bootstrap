@@ -3049,7 +3049,7 @@
 
 #define CHIP_SRAM0_BASEADDR		0x200000
 
-#if	!defined(CONFIG_AT91SAM9G20EK)
+#if	defined(CONFIG_AT91SAM9260EK) 
 #define NO_PATITION
 #endif
 
