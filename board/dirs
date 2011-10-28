@@ -5,6 +5,7 @@ DIRS=\
     at91sam9rlek \
     at91sam9g10ek \
     at91sam9g20ek \
+    at91sam9g20ek_2mmc \
     at91sam9g45ek \
     at91sam9m10ek \
     at91sam9g45ekes \
