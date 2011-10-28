@@ -1,1 +1,0 @@
-../config/at91bootstrap-config/autoconf.h
