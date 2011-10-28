@@ -214,8 +214,8 @@ EXTRA_INSTALL+=files/NAND-empty-1MB.jffs2.bz2
 EXTRA_INSTALL+=files/SD-card-tools.tar.bz2
 
 ifeq ($(CONFIG_RAW_AT91),y)
-RAW_AT91=$(BINDIR)raw-at91
-EXTRA_INSTALL+=$(BINDIR)raw-at91
+RAW_AT91=$(BINDIR)/raw-at91
+EXTRA_INSTALL+=$(BINDIR)/raw-at91
 endif
 ifeq ($(CONFIG_SX_AT91),y)
 SX_AT91=$(BINDIR)/sx-at91
