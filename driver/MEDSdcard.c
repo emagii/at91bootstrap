@@ -33,6 +33,7 @@
 //         Headers
 //------------------------------------------------------------------------------
 #include "common.h"
+#include "stddef.h"
 #include "MEDSdcard.h"
 #include "fatfs_config.h"
 
@@ -734,11 +735,12 @@ unsigned int load_SDCard(void *dst)
     do {
         ByteRead = 0;
         res = f_read(&fileObject, (void *)(dwAddress), CHUNK_SIZE, &ByteRead);
+	dbg_log(1, ".");
         dwAddress += CHUNK_SIZE;
     } while (ByteRead >= CHUNK_SIZE);
 
     if (res != FR_OK) {
-        dbg_log(1, "*** f_read: error!\n\r");
+        dbg_log(1, "\r\n*** f_read: error!\n\r");
         while (1) ;
     }
 #if !defined(at91sam9g10)
