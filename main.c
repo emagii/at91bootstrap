@@ -54,6 +54,32 @@ unsigned int	img_size	= IMG_SIZE;
 unsigned int	jump_addr	= JUMP_ADDR;
 unsigned int	altboot		= 0;
 
+
+#if defined(CONFIG_DUAL_BOOT)
+#define	DOWNLOAD_MSG	"Downloading %simage...", altboot?"Alternate ":""
+#else
+#define	DOWNLOAD_MSG	"Downloading image..."
+#endif
+
+#if	defined(CONFIG_DEBUG_LOUD) || defined(CONFIG_DEBUG_VERY_LOUD)
+void	debug_jump_addr(unsigned int addr)
+{
+	dbg_log(2, "Jumping to %x!\n\r", jump_addr);
+#if	defined(CONFIG_DEBUG_VERY_LOUD)
+	{
+		unsigned int *p;
+		p=(unsigned int *) jump_addr;
+		dbg_log(3, "Vector:\r\n");
+		dbg_log(3, "	%x %x %x %x\r\n", *p++, *p++, *p++, *p++);
+		dbg_log(3, "	%x %x %x %x\r\n", *p++, *p++, *p++, *p++);
+	}
+#endif
+}
+#else
+#define	debug_jump_addr(x)
+#endif
+
+
 /*------------------------------------------------------------------------------*/
 /* Function Name       : Wait							*/
 /* Object              : software loop waiting function				*/
@@ -101,17 +127,13 @@ int main(void)
 /* Check if we want to boot the alternate image */
 #if defined(CONFIG_DUAL_BOOT)
     if(alternate_boot_button()) {
-	dbg_log(1, "Downloading Alternate image...\r\n");
 	img_address	= ALT_IMG_ADDRESS;
 	img_size	= ALT_IMG_SIZE;
 	jump_addr	= ALT_JUMP_ADDR;
 	altboot=1;
-    } else {
-	dbg_log(1, "Downloading image...\n\r");
     }
-#else
-    dbg_log(1, "Downloading image...\n\r");
 #endif
+    dbg_log(1, DOWNLOAD_MSG);
 
 #if defined(CONFIG_LOAD_LINUX)
     LoadLinux();
@@ -130,11 +152,13 @@ int main(void)
 #error "No booting media specified!"
 #endif
 
-    dbg_log(1, "Done!\n\r");
+    dbg_log(1, "OK\r\n");
 
 #ifdef	CONFIG_LOAD_NK
     jump_addr += 0x1000;
 #endif
+
+    debug_jump_addr(jump_addr);
 
 #ifdef WINCE
     Jump(jump_addr);
