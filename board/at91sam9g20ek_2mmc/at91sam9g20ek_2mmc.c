@@ -130,7 +130,7 @@ void hw_init(void)
      * Enable Debug messages on the DBGU 
      */
     dbgu_init(BAUDRATE(MASTER_CLOCK, 115200));
-    dbgu_print("Start AT91Bootstrap...\n\r");
+    dbg_log(1,"AT91Bootstrap-%s [Build date: %s]\n\r", AT91BOOTSTRAP_VERSION, __DATE__);
 #endif                          /* CONFIG_DEBUG */
 
 #ifdef CONFIG_SDRAM
