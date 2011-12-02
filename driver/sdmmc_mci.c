@@ -33,6 +33,7 @@
 //------------------------------------------------------------------------------
 
 #include "common.h"
+#include "stddef.h"
 #include "sdmmc_mci.h"
 
 #include "pio.h"
@@ -2188,9 +2189,6 @@ unsigned char SD_WriteBlock(SdCard * pSd,
 /// \param pSd  Pointer to a SD card driver instance.
 /// \param pSdDriver  Pointer to SD driver already initialized
 //------------------------------------------------------------------------------
-// busWidth gives warnings
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
 static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
 {
     unsigned char isCCSet;
@@ -2346,26 +2344,23 @@ static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
 
             MmcCmd6Arg cmd6Arg;
 
-            unsigned char busWidth, widthMode;
+            unsigned char widthMode;
 
             // Calculate MMC busWidth (limited by slot information)
             switch (pSd->pSdDriver->mciMode & AT91C_MCI_SCDBUS) {
 #if defined(AT91C_MCI_SCDBUS_8BITS)
             case AT91C_MCI_SCDBUS_8BITS:
-                busWidth = 8;
                 widthMode = MCI_SDCBUS_8BIT;
                 break;
 #endif
 
 #if defined(AT91C_MCI_SCDBUS_4BITS)
             case AT91C_MCI_SCDBUS_4BITS:
-                busWidth = 4;
                 widthMode = MCI_SDCBUS_4BIT;
                 break;
 #endif
 
             default:
-                busWidth = 1;
                 widthMode = MCI_SDCBUS_1BIT;
             }
 
@@ -2477,7 +2472,6 @@ static unsigned short SdMmcInit(SdCard * pSd, SdDriver * pSdDriver)
 #endif
     return 0;
 }
-#pragma GCC diagnostic pop
 
 //------------------------------------------------------------------------------
 /// Run the SDcard initialization sequence. This function runs the
